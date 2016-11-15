@@ -38,22 +38,7 @@ def nivel1():
     pj=canvas1.create_image(200,415,anchor=NW,image=megaman)
 
     ########$######
-    def saltar():
-        global ventana1,canvas1,pj,posx,posy,limite
-        if(not limite):
-            posy = posy - 10
-        else:
-            posy = posy + 10
-        if(posy > -200 and not limite):
-            canvas1.delete(pj)
-            pj=canvas1.create_image(200,415,anchor=NW,image=megaman)
-            ventana1.after(10,saltar)
-        else:
-            limite = True
-            canvas1.delete(cuadrado)
-            pj=canvas1.create_image(200,415,anchor=NW,image=megaman)
-            if(posy != 0):
-                ventana1.after(10,saltar)
+    
         
     
 
