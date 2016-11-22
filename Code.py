@@ -23,9 +23,11 @@ malo4= PhotoImage(file="fantasma4.png")
 ###### prueba de variables para el salto
 posx=200
 posy=415
+################
+estado1=1
 ################## en esta funcion se definen los movimientos para el personaje principal y para los enemigos
 def teclado(event):
-    global canvas1,pj,posx,posy,pj2
+    global canvas1,pj,posx,posy,pj2,estado1
     tecla = repr(event.char)
     if(tecla == "'a'"):
         canvas1.delete(pj)
@@ -54,18 +56,52 @@ def teclado(event):
     if(tecla=="'w'"):
         canvas1.delete(pj)
         pj=canvas1.create_image(posx,posy,anchor=NW,image=megaman)
+        #### intentando hacer el salto
+        
+        
+        
+
+
+
+
         posy= posy-4
-        if(posy<=-13):
+        if(posy<=387 and posy>=299 and posx<=276 ):   ## escalones de abajo control de choque
             posy=posy+4
-        elif(posx<280):
+        elif(posy<=387 and posy>=299 and posx>=404 ):   ## escalones de abajo control de choque
             posy=posy+4
+        elif(posy<=283 and posy>=199 and posx<=92 ):   ## escalones de medio izquierda control de choque
+            posy=posy+4
+        elif(posy<=283 and posy>=199 and posx>=588 ):   ## escalones de medio derecha control de choque
+            posy=posy+4
+        elif(posy<=267 and posy>=176 and posx>=124 and posx<=556 ):   ## choque escalon medio 
+            posy=posy+4
+        elif(posy<=143 and posy>=59 and posx<=324 ):  # choque escalon arriba izquierda 
+            posy=posy+4
+        elif(posy<=143 and posy>=59 and posx>=360):   # choque escalon arriba derecha 
+            posy=posy+4
+        
+        
         
         print("pos en x",posx,"pos en y",posy )
     if(tecla=="'s'"):
         canvas1.delete(pj)
         posy= posy+4
         pj=canvas1.create_image(posx,posy,anchor=NW,image=megaman)
-        if(posy>415):
+        if(posy<=387 and posy>=299 and posx<=276): # choque primer escalon abajo izquierda
+            posy=posy-4
+        elif(posy<=387 and posy>=299 and posx>=404): # choque primer escalon abajo derecha
+            posy=posy-4
+        elif(posy<=283 and posy>=199 and posx<=92): # choque escalon medio izquierda
+            posy=posy-4
+        elif(posy<=283 and posy>=199 and posx>=588): # choque escalon medio derecha
+            posy=posy-4
+        elif(posy<=267 and posy>=176 and posx>=124 and posx<=556 ): # CHOQUE escalon medio 
+            posy=posy-4
+        elif(posy<=143 and posy>=59 and posx<=324):    # choque escalon arriba izquierda 
+            posy=posy-4
+        elif(posy<=143 and posy>=59 and posx>=360):    # choque escalon arriba derecha 
+            posy=posy-4 
+        elif (posy>=419): # que no pase del piso 
             posy=posy-4
         print("pos en x",posx,"pos en y",posy )
 
@@ -75,28 +111,7 @@ def teclado(event):
 posxmalo1=20
 posymalo1=50
 
-        
-        
-        
-    
-        
-               
-        
-        
-        
-            
-        
-        
-        
-            
-            
-    
-    
-
-    
-                    
-                
-                
+                        
 
 ###### en esta funcion se definen los distintos ventanas y canvas para los niveles
 
@@ -147,34 +162,6 @@ def dificultad(event):
         #while (posxmalo< 1000):
         enemigo1=canvas1.create_image(posxmalo1,posymalo1,anchor=NW,image=malo1)
         #canvas1.delete(enemigo1)
-            
-            
-            
-        
-
-
-
-        
-
-        
-
-         
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
 ######################################################
 def Call(): # Definimos la funcion
     global ventanajuego
@@ -195,35 +182,10 @@ def Call(): # Definimos la funcion
 def creditos():
     messagebox.showinfo(title="CREDITOS",message="Diseño : Anderson laverde \n y codigo : Anderson laverde Gracia \n Contacto :  \n Pagina de Facebook : http://goo.gl/IwPKtl ")
 ########################################    
-boton= Button(ventanamenu,text="MAMA HUEVOOOO",font=("Agenci FB",13),command= Call,bg="#0080FF",cursor="crosshair",relief="groove",activebackground="#F50743").place(x=440,y=340)
+boton= Button(ventanamenu,text="JUGAR",font=("Agenci FB",13),command= Call,bg="#0080FF",cursor="crosshair",relief="groove",activebackground="#F50743").place(x=440,y=340)
 boton2= Button(ventanamenu,text="CARGAR",font=("Agenci FB",13),bg="#FF3333",cursor="dotbox",relief="groove",activebackground="#F50743").place(x=435,y=390)
 boton3= Button(ventanamenu,text="CREDITOS",font=("Agenci FB",13),command=creditos,bg="#0080FF",cursor="fleur",relief="groove",activebackground="#F50743").place(x=430,y=440)
 boton4= Button(ventanamenu,text="SALIR",font=("Agenci FB",13),command=ventanamenu.destroy,bg="#FF3333",cursor="pirate",relief="groove",activebackground="#F50743").place(x=448,y=490)
 #########################################
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ventanamenu.mainloop() 
