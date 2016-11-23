@@ -12,51 +12,100 @@ imagenfondo= Label(ventanamenu,image=fondo1).place(x=0,y=0)
 niveles = PhotoImage(file="niveles.png")
 ##### imagen para cada nivel
 imgnivel1= PhotoImage(file="mapa.png")
-megaman= PhotoImage(file="pjderecha.png")
-megaman2= PhotoImage(file="pj2derecha.png")
+megaman= PhotoImage(file="megaman1.png")
+megaman2= PhotoImage(file="megaman2.png")
+megaman3= PhotoImage(file="megaman3.png")
+megamanderecha= PhotoImage(file="megamanderecha1.png")
+megamanderecha2= PhotoImage(file="megamanderecha2.png")
+megamanderecha3= PhotoImage(file="megamanderecha3.png")
+
+mario= PhotoImage(file="mario1.png")
+mario2= PhotoImage(file="mario2.png")
+mario3= PhotoImage(file="mario3.png")
+marioizquierda= PhotoImage(file="marioizquierda1.png")
+marioizquierda2= PhotoImage(file="marioizquierda2.png")
+marioizquierda3= PhotoImage(file="marioizquierda3.png")
+
 malo1= PhotoImage(file="fantasma1.png")
 malo2= PhotoImage(file="fantasma2.png")
 malo3= PhotoImage(file="fantasma3.png")
 malo4= PhotoImage(file="fantasma4.png")
 
 
-###### prueba de variables para el salto
+###### posicion de megaman
 posx=200
 posy=415
-################
-estado1=1
+################posicion mario inicial
+posxm=700
+posym=415
+
+#####posicion para el salto
+
+####estados para el uso y cambio de imagenes 
+estadomega=0
+estadomegaderecha=0
+estadomario=0
+estadomarioizquierda=0
 ################## en esta funcion se definen los movimientos para el personaje principal y para los enemigos
 def teclado(event):
-    global canvas1,pj,posx,posy,pj2,estado1
+    """
+    Requerimiento luego 
+    """
+    global canvas1,pj,posx,posy,pj2,estadomegaderecha,estadomega,estadomarioizquierda,estadomario,posxm,posym
     tecla = repr(event.char)
-    if(tecla == "'a'"):
-        canvas1.delete(pj)
-        posx=posx-4
-        pj=canvas1.create_image(posx,posy,anchor=NW,image=megaman)
-        
-        
-        print("pos en x",posx,"pos en y",posy )
-        #mundocontinuo
+    if(tecla == "'a'" ):
+        #print("pos en x",posx,"pos en y",posy )
+        ##mundoparalelo
         if(posx<-60):
             canvas1.delete(pj)
             posx=posx+800
             pj=canvas1.create_image(posx,posy,anchor=NW,image=megaman)
+            
+       ########     #####
+        if(estadomegaderecha==0):
+            canvas1.delete(pj)
+            pj=canvas1.create_image(posx,posy,anchor=NW,image=megamanderecha2)       
+            posx=posx-4
+            estadomegaderecha=1
+        elif(estadomegaderecha==1):
+            canvas1.delete(pj)
+            pj=canvas1.create_image(posx,posy,anchor=NW,image=megamanderecha3)       
+            posx=posx-4
+            estadomegaderecha=0
+            
+            
+        
+            
+   
+        
+        
     if(tecla == "'d'"):
-        canvas1.delete(pj)
-        posx=posx+4
-        pj=canvas1.create_image(posx,posy,anchor=NW,image=megaman)
-        print("pos en x",posx,"pos en y",posy )
+        
+        #print("pos en x",posx,"pos en y",posy )
         #mundo continuo
         if(posx>742):
             canvas1.delete(pj)
             posx=posx-800
             pj=canvas1.create_image(posx,posy,anchor=NW,image=megaman)
+            ##### cambios de imagen 
+    
+        if(estadomega==0):
+            canvas1.delete(pj)
+            pj=canvas1.create_image(posx,posy,anchor=NW,image=megaman2)       
+            posx=posx+4
+            estadomega=1
+        elif(estadomega==1):
+            canvas1.delete(pj)
+            pj=canvas1.create_image(posx,posy,anchor=NW,image=megaman3)       
+            posx=posx+4
+            estadomega=0
+    
         
             
     if(tecla=="'w'"):
         canvas1.delete(pj)
         pj=canvas1.create_image(posx,posy,anchor=NW,image=megaman)
-        #### intentando hacer el salto
+        #### intentando hacer
         
         
         
@@ -87,6 +136,10 @@ def teclado(event):
         canvas1.delete(pj)
         posy= posy+4
         pj=canvas1.create_image(posx,posy,anchor=NW,image=megaman)
+        
+        
+
+        ###### posiciones para control de choque 
         if(posy<=387 and posy>=299 and posx<=276): # choque primer escalon abajo izquierda
             posy=posy-4
         elif(posy<=387 and posy>=299 and posx>=404): # choque primer escalon abajo derecha
@@ -105,11 +158,30 @@ def teclado(event):
             posy=posy-4
         print("pos en x",posx,"pos en y",posy )
 
+    if(tecla=="'j'"):
+        if(posx<-60):
+            canvas1.delete(pj2)
+            posxm=posxm+800
+            pj2=canvas1.create_image(posxm,posym,anchor=NW,image=marioizquierda)
+            
+       ########     #####
+        if(estadomarioizquierda==0):
+            canvas1.delete(pj2)
+            pj2=canvas1.create_image(posxm,posym,anchor=NW,image=marioizquierda)       
+            posxm=posxm-4
+            estadomarioizquierda=1
+        elif(estadomarioizquierda==1):
+            canvas1.delete(pj2)
+            pj2=canvas1.create_image(posxm,posym,anchor=NW,image=marioizquierda2)       
+            posxm=posxm-4
+            estadomarioizquierda=0
+        
+        
+
 
 ##### Prueba enemigo moviendoase
 ###pos para el primer enemigo
-posxmalo1=20
-posymalo1=50
+
 
                         
 
@@ -131,7 +203,7 @@ def dificultad(event):
         canvas1.create_image(0,0,anchor=NW,image=imgnivel1)
         Btnback1= Button(ventana1,text="VOLVER",font=("Agenci FB",13),command= ventana1.destroy).place(x=0,y=0)
         pj=canvas1.create_image(posx,posy,anchor=NW,image=megaman)
-        pj2=canvas1.create_image(posx+900,posy,anchor=NW,image=megaman2)
+        pj2=canvas1.create_image(posxm,posym,anchor=NW,image=marioizquierda)
 
 
 
@@ -147,7 +219,7 @@ def dificultad(event):
         canvas1.create_image(0,0,anchor=NW,image=imgnivel1)
         Btnback1= Button(ventana1,text="VOLVER",font=("Agenci FB",13),command= ventana1.destroy).place(x=0,y=0)
         pj=canvas1.create_image(posx,posy,anchor=NW,image=megaman)
-        pj2=canvas1.create_image(posx+900,posy,anchor=NW,image=megaman2)
+        
         
         
         
